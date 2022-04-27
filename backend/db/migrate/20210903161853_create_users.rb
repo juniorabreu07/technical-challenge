@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :email
       t.string :avatar_url
-      t.jsonb :repositories
+      # t.jsonb :repositories
 
       t.timestamps
     end
