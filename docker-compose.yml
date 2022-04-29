@@ -1,5 +1,11 @@
 version: "3.9"
 services:
+  redis:
+    image: "redis:alpine"
+    hostname: redis
+    ports:
+      - "6379:6379"
+
   db:
     image: postgres:13-alpine
     volumes:
@@ -11,7 +17,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /var/lib/postgresql/data/pgdata
-
+    depends_on:
+      - redis
   # es:
   #   image: docker.elastic.co/elasticsearch/elasticsearch:6.8.9
   #   restart: always
@@ -43,5 +50,5 @@ services:
 
 volumes:
   db-volume:
-  # es-volume:
-  # redis-volume:
+    # es-volume:
+    # redis-volume:

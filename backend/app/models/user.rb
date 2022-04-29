@@ -6,13 +6,14 @@ class User < ApplicationRecord
   validates_presence_of :github_id
   validates_presence_of :login
 
-  def self.validated_and_create_or_update( username )
+  def self.validated_and_create_or_update( username, sincronize = false )
     response = API_ACTION_NOT_ALLOWED
     unless username.blank?
       api_github = ApiGithub.new
       user = User.find_by_login(username)
 
       if user.nil?
+        sincronize = true
         github_user_response = api_github.get_user(username)
         response[:msg] = github_user_response[:msg]
         unless github_user_response[:error]
@@ -24,7 +25,7 @@ class User < ApplicationRecord
         response[:data] = user
       end
 
-      if !user.nil? || !github_user_response[:error]
+      if sincronize && ( !user.nil? || !github_user_response[:error] )
         github_repos_response = api_github.get_repos(username)
         unless github_repos_response[:error]
           repos = github_repos_response[:data]
