@@ -4,19 +4,19 @@ class ApiGithub
 
   def initialize()
     @connection = nil
+    @host = "https://api.github.com"
     config_request_github()
   end
 
   def get_user(username)
-    response_request = @connection.get("https://api.github.com/user?user=#{username}")
+    response_request = @connection.get("#{@host}/users/#{username}")
     config_response_github(response_request)
   end
 
   def get_repos(username)
-    response_request = @connection.get("https://api.github.com/user/repos?user=#{username}", { per_page: 100 })
+    response_request = @connection.get("#{@host}/users/#{username}/repos?per_page=100&sort=updated")
     config_response_github(response_request)
   end
-
 
 
   private

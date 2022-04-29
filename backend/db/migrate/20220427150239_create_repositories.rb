@@ -2,6 +2,7 @@ class CreateRepositories < ActiveRecord::Migration[6.1]
   def change
     create_table :repositories do |t|
       t.references :user, index: true
+      t.integer :github_id, index: true, unique: true
       t.string :name, null: false
       t.string :node_id, null: false
       t.string :full_name, null: false

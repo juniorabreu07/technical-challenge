@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2022_04_27_150239) do
 
   create_table "repositories", force: :cascade do |t|
     t.bigint "user_id"
+    t.integer "github_id"
     t.string "name", null: false
     t.string "node_id", null: false
     t.string "full_name", null: false
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 2022_04_27_150239) do
     t.datetime "pushed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["github_id"], name: "index_repositories_on_github_id"
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
@@ -48,6 +50,7 @@ ActiveRecord::Schema.define(version: 2022_04_27_150239) do
     t.string "avatar_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["login"], name: "index_users_on_login", unique: true
   end
 
 end
