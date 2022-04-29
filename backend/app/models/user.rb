@@ -4,6 +4,38 @@ class User < ApplicationRecord
   has_many :repositories, dependent: :destroy
   accepts_nested_attributes_for :repositories, allow_destroy: true
 
+  def self.validated_and_create_or_update( username )
+    response = API_ACTION_NOT_ALLOWED
+    unless username.blank?
+      api_github = ApiGithub.new
+      user = User.find_by_login(username)
+
+      if user.nil?
+        github_user_response = api_github.get_user(username)
+        response[:msg] = github_user_response[:msg]
+        unless github_user_response[:error]
+          github_user = github_user_response[:data]
+          response = API_ACTION_NOT_ALLOWED
+        end
+      else
+        response = API_SUCCESS_OK
+        response[:data] = user
+      end
+
+      if !user.nil? || !github_user_response[:error]
+        github_repos_response = api_github.get_repos(username)
+        unless github_repos_response[:error]
+          repos = github_repos_response[:data]
+          response = self.create_or_update_user_with_repositories(github_user, repos, user)
+        end
+      end
+    else
+      response[:detail] = "Username is required"
+    end
+    response
+  end
+
+
   def self.create_or_update_user_with_repositories( github_user, repos, user)
     isUpdate = !user.nil?
     response = {error: true, msg: ERROR_REGISTRATION_NOT_ALLOWED, data: nil,status: 401}

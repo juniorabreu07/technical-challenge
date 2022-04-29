@@ -23,15 +23,15 @@ ERROR_ACTION_NOT_ALLOWED       = 'Action not allowed.'
 #===================================
 # RESPUESTA PRE - DISñADAS
 #===================================
-API_ACTION_NOT_ALLOWED                  = { msg: ERROR_ACTION_NOT_ALLOWED, error: true, status: 401, data: nil}
-API_REGISTRATION_NOT_ALLOWED            = { msg: ERROR_REGISTRATION_NOT_ALLOWED, error: true, status: 401, data: nil}
-API_ERROR_INTERNAL_SERVER               = { msg: ERROR_INTERNAL_SERVER, error: true, status: 401, data: nil }
-API_ERROR_INSUFFICIENT_PARAMETERS       = { msg: ERROR_INSUFFICIENT_PARAMETERS, error: true, status: 401, data: nil }
-API_ERROR_DUPLICATE_RECORD              = { msg: ERROR_DUPLICATE_RECORD, error: true, status: 401, data: nil }
-API_ERROR_RECORD_NOT_EXISTS             = { msg: ERROR_RECORD_NOT_EXISTS, error: true, status: 404, data: nil }
-API_SUCCESS_OK                          = { msg: SUCCESS_OK, error: false, status: 201, data: nil }
-API_SUCCESS_RECORD_UPDATED_SUCCESSFULLY = { msg: SUCCESS_RECORD_UPDATED_SUCCESSFULLY, error: false, status: 201, data: nil }
-API_SUCCESS_RECORD_DELETED_SUCCESSFULLY = { msg: SUCCESS_RECORD_DELETED_SUCCESSFULLY, error: false, status: 201, data: nil }
-API_SUCCESS_REGISTERED_SUCCESSFULLY     = { msg: SUCCESS_REGISTERED_SUCCESSFULLY, error: false, status: 201, data: nil }
-API_SUCCESS_QUERY_WITHOUT_RESULTS       = { msg: SUCCESS_QUERY_WITHOUT_RESULTS, error: false, status: 201, data: nil }
-API_SUCCESS_QUERY_OK                    = { msg: SUCCESS_OK, error: false, status: 201, data: nil }
+API_ACTION_NOT_ALLOWED                  = { msg: ERROR_ACTION_NOT_ALLOWED, error: true, status: 401, data: nil,detail: ""}
+API_REGISTRATION_NOT_ALLOWED            = { msg: ERROR_REGISTRATION_NOT_ALLOWED, error: true, status: 401, data: nil,detail: ""}
+API_ERROR_INTERNAL_SERVER               = { msg: ERROR_INTERNAL_SERVER, error: true, status: 401, data: nil ,detail: ""}
+API_ERROR_INSUFFICIENT_PARAMETERS       = { msg: ERROR_INSUFFICIENT_PARAMETERS, error: true, status: 401, data: nil ,detail: ""}
+API_ERROR_DUPLICATE_RECORD              = { msg: ERROR_DUPLICATE_RECORD, error: true, status: 401, data: nil ,detail: ""}
+API_ERROR_RECORD_NOT_EXISTS             = { msg: ERROR_RECORD_NOT_EXISTS, error: true, status: 404, data: nil ,detail: ""}
+API_SUCCESS_OK                          = { msg: SUCCESS_OK, error: false, status: 201, data: nil ,detail: ""}
+API_SUCCESS_RECORD_UPDATED_SUCCESSFULLY = { msg: SUCCESS_RECORD_UPDATED_SUCCESSFULLY, error: false, status: 201, data: nil ,detail: ""}
+API_SUCCESS_RECORD_DELETED_SUCCESSFULLY = { msg: SUCCESS_RECORD_DELETED_SUCCESSFULLY, error: false, status: 201, data: nil ,detail: ""}
+API_SUCCESS_REGISTERED_SUCCESSFULLY     = { msg: SUCCESS_REGISTERED_SUCCESSFULLY, error: false, status: 201, data: nil ,detail: ""}
+API_SUCCESS_QUERY_WITHOUT_RESULTS       = { msg: SUCCESS_QUERY_WITHOUT_RESULTS, error: false, status: 201, data: nil ,detail: ""}
+API_SUCCESS_QUERY_OK                    = { msg: SUCCESS_OK, error: false, status: 201, data: nil ,detail: ""}
