@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 2022_04_27_150239) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "login"
-    t.bigint "github_id"
+    t.string "login", null: false
+    t.bigint "github_id", null: false
     t.string "url"
     t.string "name"
     t.string "email"

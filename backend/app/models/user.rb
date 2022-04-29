@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   has_many :repositories, dependent: :destroy
   accepts_nested_attributes_for :repositories, allow_destroy: true
+  validates_presence_of :github_id
+  validates_presence_of :login
 
   def self.validated_and_create_or_update( username )
     response = API_ACTION_NOT_ALLOWED
