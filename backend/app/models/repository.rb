@@ -1,4 +1,6 @@
 class Repository < ApplicationRecord
+  searchkick
+
   belongs_to :user
 
   validates_presence_of :github_id
