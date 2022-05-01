@@ -9,6 +9,7 @@ class User < ApplicationRecord
   def self.validated_and_create_or_update( username, sincronize = false )
     response = API_ACTION_NOT_ALLOWED
     unless username.blank?
+      username = username.downcase
       api_github = ApiGithub.new
       user = User.find_by_login(username)
 
@@ -44,7 +45,7 @@ class User < ApplicationRecord
     response = {error: true, msg: ERROR_REGISTRATION_NOT_ALLOWED, data: nil,status: 401}
 
     unless isUpdate
-      user = User.new({ github_id: github_user['id'], login: github_user['login'],email: github_user['email'] , url: github_user['html_url'],avatar_url: github_user['avatar_url'], name: github_user['name']})
+      user = User.new({ github_id: github_user['id'], login: github_user['login'].downcase,email: github_user['email'] , url: github_user['html_url'],avatar_url: github_user['avatar_url'], name: github_user['name']})
     end
 
     user.prepare_repositories(repos)
