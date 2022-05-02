@@ -44,20 +44,4 @@ RSpec.describe "Api::V1::Users", type: :request do
     end
   end
 
-  # path "/api/v1/users/{username}" do
-  #   get "Get users " do
-  #     tags "users"
-  #     consumes "application/json"
-  #     # parameter name: :username, in: :path, required: true, schema: { type: :string}
-  #     parameter name: :username, in: :path, type: :string,required: true
-  #   response "201", "encounter created" do
-  #       let(:username) {'pepe' }
-  #       run_test!
-  #     end
-  #   response "422", "invalid request" do
-  #       let(:username) { 'not_found' }
-  #       run_test!
-  #     end
-  #   end
-  # end
 end

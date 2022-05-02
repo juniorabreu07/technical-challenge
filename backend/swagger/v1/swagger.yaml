@@ -4,6 +4,32 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/users/{username}/repositories":
+    get:
+      summary: Retrieve a repositories
+      tags:
+      - Repositories
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sincronize
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '201':
+          description: user search not_found
+        '401':
+          description: user not found
   "/api/v1/users/{username}":
     get:
       summary: Retrieve a User

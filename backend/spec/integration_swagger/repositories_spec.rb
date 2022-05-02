@@ -1,30 +1,44 @@
 require "swagger_helper"
 
-
 RSpec.describe "Api::V1::Users", type: :request do
   path '/api/v1/users/{username}/repositories' do
 
     get 'Retrieve a repositories' do
       tags 'Repositories'
       produces 'application/json'
-      parameter name: :username, :in => :path, :type => :string
+      parameter name: :username, :in => :path, :type => :string, :required => true
+      parameter name: :search, :in => :query, :type => :string, :required => false
+      parameter name: :sincronize, :in => :query, :type => :boolean, :required => false
 
-      response 201, 'Users found' do
+      response 201, 'Repositories found' do
         schema type: :object,
           properties: {
             error: { type: :boolean },
             msg: { type: :string },
-            data: { type: :object,
-              properties: {
-                id: {type: :integer},
-                github_id: {type: :integer},
-                login: {type: :string},
-                url: {type: :string,format: :uri},
-                name: {type: :string},
-                email: {type: :string,format: :email},
-                avatar_url: {type: :string,format: :uri},
-                created_at: {type: :string,format: 'date-time'},
-                updated_at: {type: :string,format: 'date-time'}
+            data: { type: :array,
+              items: {
+                type: :object,
+                properties: {
+                  id: {type: :integer},
+                  github_id: {type: :integer},
+                  user_id: {type: :integer},
+                  forks_count: {type: :integer},
+                  size: {type: :integer},
+                  name: {type: :string},
+                  fork: {type: :boolean},
+                  private: {type: :boolean},
+                  node_id: {type: :string, format: :uuid},
+                  language: {type: :string,nullable: true},
+                  full_name: {type: :string},
+                  git_url: {type: :string},
+                  ssh_url: {type: :string},
+                  clone_url: {type: :string,format: :uri},
+                  svn_url: {type: :string,format: :uri},
+                  forks_url: {type: :string,format: :uri},
+                  pushed_at: {type: :string,format: 'date-time'},
+                  created_at: {type: :string,format: 'date-time'},
+                  updated_at: {type: :string,format: 'date-time'}
+                }
               }
             },
             details: { type: :string },
@@ -38,6 +52,18 @@ RSpec.describe "Api::V1::Users", type: :request do
 
       response '401', 'user not found' do
         let(:username) { 'not_found' }
+        run_test!
+      end
+
+      response '201', 'user search ruby language' do
+        let(:username) { 'pepe' }
+        let(:search) { 'ruby' }
+        run_test!
+      end
+
+      response '201', 'user search not_found' do
+        let(:username) { 'pepe' }
+        let(:search) { 'not_found' }
         run_test!
       end
 
