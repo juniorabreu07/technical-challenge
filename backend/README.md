@@ -8,11 +8,11 @@ Things you may want to cover:
 * Ruby version `3.0.1`
 
 * System dependencies
- `
+ 
   * jobs: ```gem delayed_job_active_record```
   * cache: ```gem redis```
   * search: ```gem searchkick```
-`
+
 
 * Configuration
 
