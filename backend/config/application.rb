@@ -38,7 +38,18 @@ module Backend
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+    config.active_job.queue_adapter = :delayed_job
+    config.active_record.default_timezone = :local
     config.api_only = true
     Oj.optimize_rails
+    config.after_initialize do
+      is_rake = !("#{ENV.inspect}" =~ /rake/i).blank?
+      if (Rails.const_defined? 'Server')
+
+        run_job_syncronize
+      end
+    end
+
+
   end
 end

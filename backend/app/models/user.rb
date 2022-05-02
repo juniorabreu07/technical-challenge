@@ -76,4 +76,19 @@ class User < ApplicationRecord
     self.repositories = repositories
   end
 
+  def self.create_task_syncronize(time= 10.seconds.from_now)
+    self.delay(priority: 1, run_at: time, queue: "user_synchronizing_all").synchronize_all
+  end
+
+  def self.synchronize_all
+    Delayed::Job.where({queue: "user_synchronizing_all"}).delete_all
+    all.each do |user|
+      sincronize = true
+      self.validated_and_create_or_update( user.login, sincronize  )
+    end
+    next_run = DateTime.iso8601((Date.today + 1.days).to_s, Date::ENGLAND) + 30.minutes
+    self.create_task_syncronize(next_run)
+  end
+
+
 end
