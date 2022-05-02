@@ -13,7 +13,6 @@ Things you may want to cover:
   * cache: ```gem redis```
   * search: ```gem searchkick```
 
-
 * Configuration
 
 ```
@@ -54,3 +53,6 @@ we run docker to have the services of Redis, Postgresql, ElasticSearch
   example: rs -b 0.0.0.0 -p 30083
 
 ```
+
+*NOTA: update api documentation execute this command
+```rake rswag:specs:swaggerize PATTERN="spec/**/**/*_spec.rb"```
