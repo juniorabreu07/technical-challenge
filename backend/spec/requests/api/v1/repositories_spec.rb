@@ -45,4 +45,19 @@ RSpec.describe 'Api::V1::Repositories', type: :request do
     expect(repositories.size > 0).to eq(true)
     expect(repositories.first['language'].to_s.downcase).to eq('ruby')
   end
+
+  it 'gets respositories for pepe and pagination' do
+    username = 'pepe'
+    page     = 1
+    per_page = 5
+    get "/api/v1/users/#{username}/repositories?page=#{page}&per_page=#{per_page}"
+    body = JSON.parse(response.body)
+    expect(response).to have_http_status(:success)
+    expect(body).to have_key('status')
+    expect(body).to have_key('data')
+    expect(body).to have_key('msg')
+    repositories = body['data']
+    expect(repositories.class.to_s).to eq('Array')
+    expect(repositories.size).to eq(per_page)
+  end
 end

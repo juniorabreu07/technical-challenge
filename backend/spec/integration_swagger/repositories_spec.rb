@@ -9,6 +9,8 @@ RSpec.describe "Api::V1::Users", type: :request do
       parameter name: :username, :in => :path, :type => :string, :required => true
       parameter name: :search, :in => :query, :type => :string, :required => false
       parameter name: :sincronize, :in => :query, :type => :boolean, :required => false
+      parameter name: :page, :in => :query, :type => :integer, :required => false
+      parameter name: :per_page, :in => :query, :type => :integer, :required => false
 
       response 201, 'Repositories found' do
         schema type: :object,
@@ -66,24 +68,15 @@ RSpec.describe "Api::V1::Users", type: :request do
         let(:search) { 'not_found' }
         run_test!
       end
+      response '201', 'user search language by pagination' do
+        let(:username) { 'pepe' }
+        let(:search) { 'not_found' }
+        let(:page) { 1 }
+        let(:per_page) { 10 }
+        run_test!
+      end
 
     end
   end
 
-  # path "/api/v1/users/{username}" do
-  #   get "Get users " do
-  #     tags "users"
-  #     consumes "application/json"
-  #     # parameter name: :username, in: :path, required: true, schema: { type: :string}
-  #     parameter name: :username, in: :path, type: :string,required: true
-  #   response "201", "encounter created" do
-  #       let(:username) {'pepe' }
-  #       run_test!
-  #     end
-  #   response "422", "invalid request" do
-  #       let(:username) { 'not_found' }
-  #       run_test!
-  #     end
-  #   end
-  # end
 end
