@@ -19,7 +19,7 @@ Things you may want to cover:
 ```
 create file in
 config/aplication/application.yml
-GITHUB_TOKEN=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
+GITHUB_TOKEN=ghp_C2222223ffdfffasdsd
 this is my token you can generate yours on github.com it expires at the end of this month may.
 ```
 
