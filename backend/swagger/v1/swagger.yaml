@@ -1,0 +1,68 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users/{username}":
+    get:
+      summary: Retrieve a User
+      tags:
+      - Users
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Users found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      github_id:
+                        type: integer
+                      login:
+                        type: string
+                      url:
+                        type: string
+                        format: uri
+                      name:
+                        type: string
+                      email:
+                        type: string
+                        format: email
+                      avatar_url:
+                        type: string
+                        format: uri
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                  details:
+                    type: string
+                  status:
+                    type: integer
+                required:
+                - data
+        '401':
+          description: user not found
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
